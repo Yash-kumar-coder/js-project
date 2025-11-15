@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* body {
+        margin: 0;
+        padding: 0;
+        background-color: rgba(255, 196, 0, 0.534);
+
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        Margin-top: 50–80px ;
+       
+        Padding: 20–30px;
+         Border-radius: Box-shadow (light);
+    } */
+
+    /* style.css - To-Do App */
+
+    /* 1) Page reset + base */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background-color: rgba(255, 196, 0, 0.534);
+        color: #111;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+    }
+
+    /* 2) App card */
+    .main {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(16, 24, 40, 0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* 3) Heading */
+    .main h1 {
+        margin: 0;
+        font-size: 1.6rem;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #0b1220;
+    }
+
+    /* 4) Form layout (input + button) */
+    #todo-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #task-input {
+        flex: 1;
+        padding: 10px 12px;
+        font-size: 0.97rem;
+        border: 1px solid rgba(11, 18, 32, 0.12);
+        border-radius: 8px;
+        outline: none;
+        transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    #task-input:focus {
+        border-color: rgba(11, 18, 32, 0.25);
+        box-shadow: 0 4px 12px rgba(11, 18, 32, 0.06);
+    }
+
+    /* button */
+    #todo-form button {
+        padding: 10px 14px;
+        border: none;
+        background: #111827;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.08s ease, opacity 0.12s ease;
+    }
+
+    #todo-form button:active {
+        transform: translateY(1px);
+    }
+
+    #todo-form button:hover {
+        opacity: 0.95;
+    }
+
+    /* 5) Task list base */
+    #task-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Each task row */
+    #task-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #fbfbfd;
+        border: 1px solid rgba(11, 18, 32, 0.04);
+        font-size: 0.98rem;
+    }
+
+    /* Left side of task (text + optional checkbox) */
+    .task-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        word-break: break-word;
+    }
+
+    /* Completed task visual */
+    .completed .text {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+
+    /* Delete button */
+    .delete-btn {
+        background: transparent;
+        border: none;
+        color: #ef4444;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 6px 8px;
+        border-radius: 6px;
+    }
+
+    .delete-btn:hover {
+        background: rgba(239, 68, 68, 0.08);
+    }
+
+    /* Small responsive tweaks */
+    @media (max-width: 420px) {
+        .main {
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        #task-input {
+            font-size: 0.95rem;
+        }
+
+        #todo-form button {
+            padding: 9px 12px;
+        }
+    }
+
+    .completed {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+</style>
+
+<body>
+
+    <div class="main">
+        <h1>My To-Do App</h1>
+        <form id="todo-form">
+            <input type="text" id="task-input" placeholder="Naya task likho..." autocomplete="off" />
+            <button type="submit">Add</button>
+        </form>
+        <ul id="task-list"></ul>
+    </div>
+
+
+    <script>
+        let todo = document.getElementById("todo-form");
+        let taskinput = document.getElementById("task-input");
+        let tasklist = document.getElementById("task-list");
+
+        todo.addEventListener("submit", function (e) {
+            e.preventDefault();// isse page reload nhi hoga
+            let taskText = taskinput.value.trim();// trim() extra spaces remove krne k liye
+            if (taskText === "") {
+                alert("enter");
+                return;// agar input empty h to kuch na kro
+            }
+            let li = document.createElement("li");
+            li.innerText = taskText;
+            tasklist.appendChild(li);
+            taskinput.value = "";
+            taskinput.focus();
+            li.addEventListener("click", function () {
+                li.classList.toggle("completed");
+            });
+
+
+
+        });
+
+    </script>
+</body>
+
+</html>
